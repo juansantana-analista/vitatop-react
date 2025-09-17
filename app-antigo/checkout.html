@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8">
+      <meta name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#FF4B00">
+      <!-- Your app title -->
+      <title>G3 PAY</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css">
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css">
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css">
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="checkout" class="page color-theme-blue">
+               <div class="nav-top cart">
+                  <a href="/carrinho/"><i class="ri-arrow-left-s-line"></i></a>
+                  <strong> <i class="mdi mdi-cart-check"></i> Checkout</strong>
+                  <a href="#" class="link"><i class="ri-more-fill"></i></a>
+               </div>
+               <!-- TAB BAR-->
+               <div id="toolbarCheckout" class="toolbar toolbar-bottom">
+                  <div class="toolbar-inner display-flex align-items-center justify-content-center">
+                     <div class="flex-100" style="margin: 20px;">
+                        <button class="btn-primary" id="finalizarCompra">Finalizar Compra</button>
+                     </div>
+                  </div>
+               </div>
+               <!-- Scrollable page content -->
+               <div class="page-content ptr-content" style="background:#f0f0f0;" >
+                  <div style="margin: 12px;">
+                     <div class="block-title"><b class="text-skin">ENTREGA</b></div>
+                     <div class="card-content card-content-padding" style="background:white; border-radius: 10px;">
+                        <div class="row" style="display: flex;">
+                           <div class="col-80">
+                              <span id="clienteNome"></span><br>
+                              <span id="enderecoRua"></span>, <span id="enderecoNumero"></span><br>
+                              <span id="enderecoComplemento"></span>  Bairro: <span id="enderecoBairro"></span><br>
+                              <span id="enderecoCidade"></span> - <span id="enderecoEstado"></span><br>
+                              CEP: <span id="enderecoCep"></span><br>
+                           </div>
+                           <div class="col-20"><br>
+                              <a href="/carrinho/"><b class="text-skin"><i class="mdi mdi-lead-pencil"></i> Endereço</b></a>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="block-title"><b class="text-skin">ITENS</b></div>
+                     <div class="list no-chevron" style="background:white; border-radius: 10px;">
+                        <ul id="listaItensConfirmation">
+                        </ul>
+                     </div>
+                     <div class="block-title" id="formaPagamentoLabel"><b class="text-skin">PAGAMENTO</b></div>
+                     <div class="list no-chevron" id="formaPagamentoDiv" style="background:white; border-radius: 10px;">
+                        <div class="block" style="padding-bottom: 20px;">
+                           <!-- Payment Methods Section -->
+                           <div class="section">
+                              <div class="payment-methods">
+                                 <div class="payment-method active" data-method="pix">
+                                    <i class="mdi mdi-qrcode"></i><br>
+                                    <span>Pix</span>
+                                 </div>
+                                 <div class="payment-method" data-method="card">
+                                    <i class="mdi mdi-credit-card"></i><br>
+                                    <span>Cartão</span>
+                                 </div>
+                                 <div class="payment-method" data-method="boleto">
+                                    <i class="mdi mdi-barcode"></i><br>
+                                    <span>Boleto</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Payment Details Section -->
+                           <div class="section" id="payment-details">
+                              <!-- Payment details will be inserted here based on the selected payment method -->
+                           </div>
+                        </div>
+                     </div>
+                     <div class="list no-chevron" style="background:white; border-radius: 10px;">
+                        <ul>
+                           <li id="variacaoL">
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-header"><b>SUBTOTAL:</b></div>
+                                    </div>
+                                    <div class="item-after">                                        
+                                       <i style="font-size: 14px; margin-right: 4px;"></i>
+                                       <span id="subTotalCheckout"></span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li id="variacaoL">
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-header"><b>FRETE:</b></div>
+                                    </div>
+                                    <div class="item-after">                                        
+                                       <i style="font-size: 14px; margin-right: 4px;"></i>
+                                       <span id="freteCheckout"></span>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li>
+                              <a href="#" class="item-link item-content">
+                                 <div class="item-inner">
+                                    <div class="item-title">
+                                       <div class="item-header"><b  style="font-size:25px">TOTAL:</b></div>
+                                    </div>
+                                    <div class="item-after"><b id="totalCheckout" style="font-size:22px; color:black"></b></div>
+                                 </div>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <br><br><br>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

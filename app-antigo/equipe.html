@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#1d4f91" />
+      <!-- Your app title -->
+      <title>VitaTop</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css" />
+      <link rel="stylesheet" href="css/gestao.css" />
+      <link rel="stylesheet" href="css/equipe.css" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="equipe" class="page color-theme-blue">
+               <!-- NAV TOPO-->
+               <div class="top-nav">
+                  <div class="left">
+                     <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+                  </div>
+                  <!-- Agrupe os ícones em uma div -->
+                  <div class="right-icons">
+                     <!-- Botão de Notificações -->
+                     <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                        <i class="mdi mdi-bell-outline"></i>
+                     </div>
+                     <!-- Botão do Carrinho -->
+                     <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                        <i class="mdi mdi-cart-outline"></i>
+                     </div>
+                  </div>
+               </div>
+               <!-- Scrollable page content -->
+               <div class="page-content" style="background-color: #f7f9fa; padding-bottom: 160px">
+                  <!-- Dashboard Header -->
+                  <div class="dashboard-header">
+                     <h1>Indicados</h1>
+                     <p>Gerencie e acompanhe seus indicados diretos e indiretos</p>
+                  </div>
+                  <!-- Dashboard Summary Cards -->
+                  <div class="dashboard-section">
+                     <h2 class="section-title">Resumo de Indicados</h2>
+                     <div class="summary-cards">
+                        <!-- Total da Equipe -->
+                        <div class="summary-card">
+                           <div class="card-icon">
+                              <i class="mdi mdi-account-group"></i>
+                           </div>
+                           <div class="card-title">Total de Indicados</div>
+                           <div class="card-value" id="totalEquipe">0</div>
+                        </div>
+                        <!-- Indicados Diretos -->
+                        <div class="summary-card">
+                           <div class="card-icon">
+                              <i class="mdi mdi-account-plus"></i>
+                           </div>
+                           <div class="card-title">Indicados Diretos</div>
+                           <div class="card-value" id="indicadosDiretos">0</div>
+                        </div>
+                        <!-- Indicados Indiretos -->
+                        <div class="summary-card">
+                           <div class="card-icon">
+                              <i class="mdi mdi-account-multiple"></i>
+                           </div>
+                           <div class="card-title">Indicados Indiretos</div>
+                           <div class="card-value" id="indicadosIndiretos">0</div>
+                        </div>
+                        <!-- Nível da Rede -->
+                        <div class="summary-card">
+                           <div class="card-icon">
+                              <i class="mdi mdi-trophy"></i>
+                           </div>
+                           <div class="card-title">Distribuidor</div>
+                           <div class="card-value">
+                              <span class="level-badge gold" style="font-size: 14px;">Independente</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+        <!-- Filtros da Equipe -->
+        <div class="dashboard-section">
+            <h2 class="section-title">Filtrar Indicados</h2>
+            <div class="team-filters">
+                <button class="filter-btn-equipe active" data-filter="all">
+                    <i class="mdi mdi-account-group"></i>
+                    Todos
+                </button>
+                <button class="filter-btn-equipe" data-filter="direct">
+                    <i class="mdi mdi-account-plus"></i>
+                    Diretos
+                </button>
+                <button class="filter-btn-equipe" data-filter="indirect">
+                    <i class="mdi mdi-account-multiple"></i>
+                    Indiretos
+                </button>
+            </div>
+        </div>
+                  <!-- Lista da Equipe -->
+                  <div class="dashboard-section">
+                     <h2 class="section-title">Indicados</h2>
+                     <div class="team-list" id="teamContainer">
+                        <!-- Skeleton loading while data loads -->
+                        <div class="team-skeleton">
+                           <div class="skeleton-card">
+                              <div class="skeleton-avatar"></div>
+                              <div class="skeleton-content">
+                                 <div class="skeleton-line skeleton-title"></div>
+                                 <div class="skeleton-line skeleton-subtitle"></div>
+                                 <div class="skeleton-line skeleton-info"></div>
+                              </div>
+                           </div>
+                           <div class="skeleton-card">
+                              <div class="skeleton-avatar"></div>
+                              <div class="skeleton-content">
+                                 <div class="skeleton-line skeleton-title"></div>
+                                 <div class="skeleton-line skeleton-subtitle"></div>
+                                 <div class="skeleton-line skeleton-info"></div>
+                              </div>
+                           </div>
+                           <div class="skeleton-card">
+                              <div class="skeleton-avatar"></div>
+                              <div class="skeleton-content">
+                                 <div class="skeleton-line skeleton-title"></div>
+                                 <div class="skeleton-line skeleton-subtitle"></div>
+                                 <div class="skeleton-line skeleton-info"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Link de Indicação -->
+                  <div class="dashboard-section">
+                     <h2 class="section-title">Quem Indica Amigo É!</h2>
+                     <div class="invitation-card">
+                        <div class="invitation-header">
+                           <i class="mdi mdi-share-variant"></i>
+                           <h3>Convide Novos Membros</h3>
+                        </div>
+                        <p>Compartilhe seu link de indicação e aumente seus Lucros</p>
+                        <div class="invitation-actions">
+                           <button class="btn-share abrir-popup">
+                           <i class="mdi mdi-share"></i>
+                           Compartilhar Link
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Refresh Button -->
+                  <button class="refresh-button" id="updateTeamData">
+                  <i class="mdi mdi-refresh"></i>
+                  </button>
+                  <!-- INÍCIO POPUP COMPARTILHAR LINK -->
+                  <div class="popup popup-compartilhar">
+                     <div class="view popup-view">
+                        <div class="page">
+                           <div class="top-nav">
+                              <div class="left">
+                                 <a href="#" class="link btn-novo popup-close">
+                                 <i class="mdi mdi-arrow-left"></i>
+                                 </a>
+                              </div>
+                              <strong class="title-descricao">
+                              <i class="ri-share-2-line"></i> Compartilhar Link
+                              </strong>
+                              <div style="width: 30px;"></div>
+                           </div>
+                           <div class="page-content">
+                              <div class="container-link">
+                              <div class="card-link">
+                                 <!--
+                                 <div class="qr-container">
+                                    <div id="qrcode"></div>
+                                 </div>
+                                 -->
+                                 <div class="share-info">
+                                    <div style="color: #2d3436; font-weight: 600; margin-bottom: 12px;">
+                                       Link de Indicação de Cadastro
+                                    </div>
+                                    <div class="share-link" id="link-cadastro">
+                                       <!-- Conteúdo preenchido dinamicamente pelo JavaScript -->
+                                    </div>
+                                 </div>
+                                 <button class="share-button-link" id="compartilharLinkCadastro" style="margin-bottom: 12px;">
+                                 <i class="ri-share-forward-line"></i>
+                                 Compartilhar
+                                 </button>
+                                 <div class="share-info">
+                                    <div style="color: #2d3436; font-weight: 600; margin-bottom: 12px;">
+                                       Link de Indicação Pagina Explicativa
+                                    </div>
+                                    <div class="share-link" id="link-lp">
+                                       <!-- Conteúdo preenchido dinamicamente pelo JavaScript -->
+                                    </div>
+                                    <span>Compartilhe este link para expandir sua rede de indicados e aumentar seus lucros!</span>
+                                 </div>
+                                 <button class="share-button-link" id="compartilharLinkLp">
+                                 <i class="ri-share-forward-line"></i>
+                                 Compartilhar
+                                 </button>
+                              </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- FIM POPUP COMPARTILHAR LINK -->
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

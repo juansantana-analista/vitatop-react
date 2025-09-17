@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-touch-fullscreen" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="apple-mobile-web-app-title" content="VitaTop">
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+      <meta http-equiv="Pragma" content="no-cache">
+      <meta http-equiv="Expires" content="0">
+      <link rel="manifest" href="/manifest.json">
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#00591F" />
+      <!-- Your app title -->
+      <title>VITATOP</title>
+      <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+      <script>
+         if (typeof navigator.serviceWorker !== 'undefined') {
+           navigator.serviceWorker.register('OneSignalSDKWorker.js');
+         }
+         
+         window.OneSignalDeferred = window.OneSignalDeferred || [];
+         OneSignalDeferred.push(async function(OneSignal) {
+           await OneSignal.init({
+             appId: "7bfc9cb0-b251-4b3a-be5c-be82c1a143e2",
+             external_id: '11',
+             welcomeNotification: {
+               disable: false, // Ativa a notificação de boas-vindas
+               title: "Bem-vindo!",
+               message: "Obrigado por se inscrever! Você receberá nossas últimas atualizações.",
+             },
+           });
+         });
+      </script>   
+      <!-- SCRIPT PARA CORRIGIR PROBLEMA DO iOS - ADICIONE DEPOIS DAS META TAGS -->
+      <script>
+      // Fix para iOS Safari PWA
+      (function() {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      
+      if (isIOS) {
+         let wasHidden = false;
+         
+         document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+            wasHidden = true;
+            localStorage.setItem('app_last_hidden', Date.now().toString());
+            } else if (wasHidden) {
+            const lastHidden = localStorage.getItem('app_last_hidden');
+            const timeDiff = Date.now() - (lastHidden ? parseInt(lastHidden) : 0);
+            
+            // Se ficou em background por mais de 10 minutos, força refresh
+            if (timeDiff > 600000) {
+               console.log('App retornando após longo período, forçando refresh...');
+               window.location.reload(true);
+            }
+            }
+         });
+         
+         // Detecta pageshow (específico do iOS)
+         window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+            console.log('Página carregada do cache, verificando...');
+            const lastHidden = localStorage.getItem('app_last_hidden');
+            if (lastHidden) {
+               const timeDiff = Date.now() - parseInt(lastHidden);
+               if (timeDiff > 600000) {
+                  window.location.reload(true);
+               }
+            }
+            }
+         });
+         
+         // Verifica se a tela ficou branca após 5 segundos
+         setTimeout(function() {
+            if (document.body.innerText.trim().length === 0) {
+            console.log('Tela branca detectada, recarregando...');
+            window.location.reload(true);
+            }
+         }, 5000);
+      }
+      })();
+      </script>   
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/carrinho.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/gestao.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/detalhes.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/equipe.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/panel.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/perfil.css?v=2.4.0" />
+      <link rel="stylesheet" href="css/minha-loja.css?v=2.4.0" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js/minified/introjs.min.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- TAB BAR-->
+            <div class="display-none" id="menuPrincipal">
+               <div class="bottom-nav">            
+                  <a href="/carrinho/" class="tab-link link cart-link">
+                  <i class="mdi mdi-cart-outline"></i>
+                  <span class="cart-badge" data-count="0">Carrinho</span>
+                  </a>
+                  <a href="/campanhas/" class="tab-link link">
+                  <i class="mdi mdi-bullhorn"></i>
+                  <span>Campanhas</span>
+                  </a> 
+                  <a href="/home/" class="tab-link link active">
+                  <i class="mdi mdi-home"></i>
+                  <span>Início</span>
+                  </a>  
+                  <a href="/gestao/" class="tab-link link">
+                  <i class="mdi mdi-store"></i>
+                  <span>Gestão</span>
+                  </a>    
+                  <a href="" class="tab-link link">
+                  <i class="mdi mdi-menu"></i>
+                  <span>Menu</span>
+                  </a>
+               </div>
+            </div>
+            <!-- Adicionar este código no index.html, após o panel existente -->
+            <!-- Novo Panel Menu Lateral Direito -->
+            <div class="panel panel-right panel-cover panel-init" id="panel-menu-lateral" data-container-el="#app">
+               <!-- Header do menu com fundo verde -->
+               <div class="block topo-painel skin" id="blocoMenuLateral">
+                  <div class="block-header">
+                     <div class="row" style="color: #fff;">
+                        <div class="col-20 profile-avatar-menu" style="font-size:28px;">
+                           <img src="img/user.jpg" alt="" id="profileImageMenu">
+                        </div>
+                        <div class="col-80">
+                           <strong id="menuLateralNome">VITATOP</strong><br />
+                           <small id="nomeUsuarioLateral"></small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Lista de opções do menu com fundo branco -->
+               <div class="list links-list no-hairlines no-hairlines-between no-chevron menu-lateral-list">
+                  <ul>
+                     <li>
+                        <a href="/home/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-home-outline"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Início</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="/equipe/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-account-group"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Indicados</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="/pedidos/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-file-check"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Meus Pedidos</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="/vendas/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-sale"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Vendas Digitais</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="/perfil/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-account"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Perfil</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="/minha-loja/" class="panel-close item-menu-lateral">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-store-edit"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Sua Loja</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <!-- Separador -->
+                     <li class="menu-separador">
+                        <div class="item-content">
+                           <div class="item-inner">
+                              <div class="separator-line"></div>
+                           </div>
+                        </div>
+                     </li>
+                     <!-- Ajuda -->
+                     <li>
+                        <a href="#" class="item-menu-lateral" id="ajuda-menu">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-help-circle-outline"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Ajuda</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <!-- Sair -->
+                     <li>
+                        <a href="#" class="item-menu-lateral" id="sair-menu">
+                           <div class="item-content">
+                              <div class="item-media"><i class="mdi mdi-logout"></i></div>
+                              <div class="item-inner">
+                                 <div class="item-title">Sair</div>
+                              </div>
+                           </div>
+                        </a>
+                     </li>
+                     <!-- Logo -->
+                     <li class="menu-logo">
+                        <div class="item-content">
+                           <div class="item-inner">
+                              <center><img src="img/logo.png" width="130px" alt="VitaTop"></center>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div id="installBanner" class="install-banner display-none">
+               <div class="col-15">
+                  <img src="favicon.png" alt="VitaTop Logo" class="app-logo">
+               </div>
+               <div class="banner-text col-85" id="conteudoInstall">
+               </div>
+            </div>
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="index" class="page color-theme-blue">
+               <!-- Scrollable page content -->
+               <div class="page-content"></div>
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <script type="text/javascript" src="lib/jquery.mask.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+      <script src="lib/jwt-decode.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+      <!-- Roteamento do app-->       
+      <script type="text/javascript" src="js/funcoes.js?v=2.4.0"></script>
+      <script type="text/javascript" src="js/minha-loja.js?v=2.4.0"></script>
+      <script type="text/javascript" src="js/routes.js?v=2.4.0"></script>   
+      <script src="cordova.js"></script>
+   </body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#1d4f91" />
+      <!-- Your app title -->
+      <title>VitaTop</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+         <!-- Initial Page, "data-name" contains page name -->
+         <div data-name="home" class="page color-theme-blue">
+            <!-- NAV TOPO-->
+            <div class="top-nav">
+               <div class="left">
+                  <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+               </div>
+               <!-- Agrupe os ícones em uma div -->
+               <div class="right-icons">
+                  <!-- Botão de Notificações -->
+                  <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                     <i class="mdi mdi-bell-outline"></i>
+                  </div>
+                  <!-- Botão do Carrinho -->
+                  <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                     <i class="mdi mdi-cart-outline"></i>
+                  </div>
+               </div>
+            </div>
+            <!-- Scrollable page content -->
+            <div
+               class="page-content"
+               style="background-color: #f7f9fa; padding-bottom: 160px"
+               >
+               <!-- Dashboard Header -->
+               <div class="dashboard-header">
+                  <h1>Gestão do Distribuidor</h1>
+                  <p>Acompanhe sua performance e lucros</p>
+               </div>
+
+               <!-- Carteira Digital Section -->
+               <div class="dashboard-section">
+                  <h2 class="section-title">Carteira Digital</h2>
+                  <div class="wallet-card">
+                     <div class="wallet-header">
+                        <div class="wallet-icon">
+                           <i class="mdi mdi-wallet"></i>
+                        </div>
+                        <div class="wallet-info">
+                           <div class="wallet-label">Saldo Total</div>
+                           <div class="wallet-balance">
+                              <span id="saldoTotal" class="hidden">R$ 0,00</span>
+                              <span id="saldoMask">••••••</span>
+                              <button class="toggle-balance" id="toggleBalance">
+                                 <i class="mdi mdi-eye-off" id="eyeIcon"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="wallet-details">
+                        <div class="wallet-detail-item">
+                           <div class="detail-icon available">
+                              <i class="mdi mdi-check-circle"></i>
+                           </div>
+                           <div class="detail-info">
+                              <div class="detail-label">Disponível</div>
+                              <div class="detail-value" id="saldoDisponivel">R$ 0,00</div>
+                           </div>
+                        </div>
+                        
+                        <div class="wallet-detail-item">
+                           <div class="detail-icon blocked">
+                              <i class="mdi mdi-clock-alert"></i>
+                           </div>
+                           <div class="detail-info">
+                              <div class="detail-label">Bloqueado</div>
+                              <div class="detail-value" id="saldoBloqueado">R$ 0,00</div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="wallet-actions">
+                        <!--
+                        <button class="wallet-action-btn" id="btnTransferir">
+                           <i class="mdi mdi-bank-transfer"></i>
+                           <span>Transferir</span>
+                        </button>
+                        -->
+                        <button class="wallet-action-btn" id="btnSacar">
+                           <i class="mdi mdi-cash-refund"></i>
+                           <span>Sacar</span>
+                        </button>
+                        <button class="wallet-action-btn" id="btnExtrato">
+                           <i class="mdi mdi-file-document-outline"></i>
+                           <span>Extrato</span>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Dashboard Summary Cards -->
+               <div class="dashboard-section">
+                  <h2 class="section-title">Resumo</h2>
+                  <div class="summary-cards">
+                     <!-- Vendas no Mês -->
+                     <div class="summary-card vendas-mes">
+                        <div class="card-icon">
+                           <i class="mdi mdi-cart"></i>
+                        </div>
+                        <div class="card-title">Vendas no Mês</div>
+                        <div class="card-value" id="valorVenda">R$ 0,00</div>
+                     </div>
+                     <!-- Clientes Indicados -->
+                     <div class="summary-card afiliados-ativos">
+                        <div class="card-icon">
+                           <i class="mdi mdi-account-group"></i>
+                        </div>
+                        <div class="card-title">Indicados Ativos</div>
+                        <div class="card-value" id="qtdeGeral">0</div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Referral link card section -->
+               <div class="dashboard-section">
+                  <h2 class="section-title">Link de Indicação</h2>
+                  <div class="referral-card">
+                     <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Quem Indica Amigo é, faça parte do Clube:</p>
+                     <div class="referral-link">
+                        <div class="referral-link-text" title="https://app.exemplo.com/ref/joao123">
+                           https://cadastrovitatop.tecskill.com.br/index.php
+                        </div>
+                        <button class="share-button abrir-popup" style="background-color: #7CBE42; color: #fff; width: 24px; align-items: center; justify-content: center;">
+                        <i class="fas fa-share-alt"></i>
+                        </button>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Dashboard Transactions Section 
+               <div class="dashboard-section">
+                  <h2 class="section-title">Últimas Transações</h2>
+                  <div class="transaction-list" id="transactionList">
+                  </div>
+               </div>
+               -->
+
+               <!-- Refresh Button -->
+               <button class="refresh-button update-button" id="updateData">
+               <i class="mdi mdi-refresh"></i>
+               </button>
+
+               <!-- POPUP SAQUE -->
+               <div class="popup popup-saque">
+                  <div class="view popup-view">
+                     <div class="page">
+                        <div class="top-nav">
+                           <div class="left">
+                              <a href="#" class="link btn-novo popup-close">
+                              <i class="mdi mdi-arrow-left"></i>
+                              </a>
+                           </div>
+                           <strong class="title-descricao">
+                           <i class="mdi mdi-cash"></i> Solicitar Saque
+                           </strong>
+                           <div style="width: 30px;"></div>
+                        </div>
+                        <div class="page-content">
+                           <div class="block">
+                              <div class="saque-info">
+                                 <div class="saque-saldo">
+                                    <div class="saldo-label">Saldo Disponível</div>
+                                    <div class="saldo-value" id="saldoDisponivelSaque">R$ 0,00</div>
+                                 </div>
+                                 
+                                 <div class="list no-hairlines">
+                                    <ul>
+                                       <li class="item-content item-input">
+                                          <div class="item-inner">
+                                             <div class="item-title item-label">Valor do Saque</div>
+                                             <div class="item-input-wrap">
+                                                <input type="text" id="valorSaque" placeholder="R$ 0,00" class="money-input">
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li class="item-content item-input">
+                                          <div class="item-inner">
+                                             <div class="item-title item-label">Tipo de Chave PIX</div>
+                                             <div class="item-input-wrap">
+                                                <select id="tipoChavePix">
+                                                   <option value="">Selecione</option>
+                                                   <option value="cpf">CPF</option>
+                                                   <option value="cnpj">CNPJ</option>
+                                                   <option value="email">E-mail</option>
+                                                   <option value="telefone">Telefone</option>
+                                                   <option value="aleatoria">Chave Aleatória</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li class="item-content item-input">
+                                          <div class="item-inner">
+                                             <div class="item-title item-label">Chave PIX</div>
+                                             <div class="item-input-wrap">
+                                                <input type="text" id="chavePix" placeholder="Digite sua chave PIX">
+                                             </div>
+                                          </div>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <div class="saque-taxas">
+                                    <div class="taxa-info">
+                                       <i class="mdi mdi-information-outline"></i>
+                                       <span>Taxa de saque: R$ 2,50</span>
+                                    </div>
+                                    <div class="valor-liquido">
+                                       <span>Valor líquido:</span>
+                                       <strong id="valorLiquido">R$ 0,00</strong>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="block">
+                                    <button class="button button-fill" id="confirmarSaque">
+                                       <i class="mdi mdi-check"></i>
+                                       Confirmar Saque
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- POPUP EXTRATO -->
+               <div class="popup popup-extrato">
+                  <div class="view popup-view">
+                     <div class="page">
+                        <div class="top-nav">
+                           <div class="left">
+                              <a href="#" class="link btn-novo popup-close">
+                              <i class="mdi mdi-arrow-left"></i>
+                              </a>
+                           </div>
+                           <strong class="title-descricao">
+                           <i class="mdi mdi-file-document-outline"></i> Extrato
+                           </strong>
+                           <div style="width: 30px;"></div>
+                        </div>
+                        <div class="page-content">
+                           <div class="extrato-filters">
+                              <button class="filter-btn active" data-filter="all">Todos</button>
+                              <button class="filter-btn" data-filter="entrada">Entradas</button>
+                              <button class="filter-btn" data-filter="saida">Saídas</button>
+                           </div>
+                           
+                           <div class="extrato-list" id="extratoList">
+                              <!-- Itens do extrato serão carregados aqui -->
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- POPUP TRANSFERIR -->
+               <div class="popup popup-transferir">
+                  <div class="view popup-view">
+                     <div class="page">
+                        <div class="top-nav">
+                           <div class="left">
+                              <a href="#" class="link btn-novo popup-close">
+                              <i class="mdi mdi-arrow-left"></i>
+                              </a>
+                           </div>
+                           <strong class="title-descricao">
+                           <i class="mdi mdi-bank-transfer"></i> Transferir
+                           </strong>
+                           <div style="width: 30px;"></div>
+                        </div>
+                        <div class="page-content">
+                           <div class="block">
+                              <div class="transfer-info">
+                                 <div class="saque-saldo">
+                                    <div class="saldo-label">Saldo Disponível</div>
+                                    <div class="saldo-value" id="saldoDisponivelTransf">R$ 0,00</div>
+                                 </div>
+                                 
+                                 <div class="list no-hairlines">
+                                    <ul>
+                                       <li class="item-content item-input">
+                                          <div class="item-inner">
+                                             <div class="item-title item-label">CPF do Destinatário</div>
+                                             <div class="item-input-wrap">
+                                                <input type="text" id="cpfDestinatario" placeholder="000.000.000-00">
+                                             </div>
+                                          </div>
+                                       </li>
+                                       <li class="item-content item-input">
+                                          <div class="item-inner">
+                                             <div class="item-title item-label">Valor da Transferência</div>
+                                             <div class="item-input-wrap">
+                                                <input type="text" id="valorTransferencia" placeholder="R$ 0,00" class="money-input">
+                                             </div>
+                                          </div>
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 
+                                 <div class="destinatario-info display-none" id="destinatarioInfo">
+                                    <div class="info-card">
+                                       <i class="mdi mdi-account-check"></i>
+                                       <div>
+                                          <div class="destinatario-nome" id="nomeDestinatario"></div>
+                                          <div class="destinatario-cpf" id="cpfDestinatarioInfo"></div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="block">
+                                    <button class="button button-fill" id="confirmarTransferencia">
+                                       <i class="mdi mdi-check"></i>
+                                       Confirmar Transferência
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- INÍCIO POPUP COMPARTILHAR LINK -->
+               <div class="popup popup-compartilhar">
+                  <div class="view popup-view">
+                     <div class="page">
+                        <div class="top-nav">
+                           <div class="left">
+                              <a href="#" class="link btn-novo popup-close">
+                              <i class="mdi mdi-arrow-left"></i>
+                              </a>
+                           </div>
+                           <strong class="title-descricao">
+                           <i class="ri-share-2-line"></i> Compartilhar Link
+                           </strong>
+                           <div style="width: 30px;"></div>
+                        </div>
+                        <div class="page-content">
+                           <div class="container-link">
+                              <div class="card-link">
+                                 <div class="share-info">
+                                    <div style="color: #2d3436; font-weight: 600; margin-bottom: 12px;">
+                                       Link de Indicação de Cadastro
+                                    </div>
+                                    <div class="share-link" id="link-cadastro">
+                                       <!-- Conteúdo preenchido dinamicamente pelo JavaScript -->
+                                    </div>
+                                 </div>
+                                 <button class="share-button-link" id="compartilharLinkCadastro" style="margin-bottom: 12px;">
+                                 <i class="ri-share-forward-line"></i>
+                                 Compartilhar
+                                 </button>
+                                 <div class="share-info">
+                                    <div style="color: #2d3436; font-weight: 600; margin-bottom: 12px;">
+                                       Link de Indicação Pagina Explicativa
+                                    </div>
+                                    <div class="share-link" id="link-lp">
+                                       <!-- Conteúdo preenchido dinamicamente pelo JavaScript -->
+                                    </div>
+                                    <span>Compartilhe este link para expandir sua rede de indicados e aumentar seus lucros!</span>
+                                 </div>
+                                 <button class="share-button-link" id="compartilharLinkLp">
+                                 <i class="ri-share-forward-line"></i>
+                                 Compartilhar
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- FIM POPUP COMPARTILHAR LINK -->
+               
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   </body>
+</html>

@@ -1,0 +1,33 @@
+<IfModule mod_headers.c>
+  # HTML e JS sempre sem cache (CRITICAL para iOS)
+  <FilesMatch "\.(html|js)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  
+  # CSS com cache moderado
+  <FilesMatch "\.css$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=3600"
+    Header set Pragma "no-cache"
+  </FilesMatch>
+  
+  # Service Worker sempre sem cache
+  <FilesMatch "(OneSignalSDKWorker|sw)\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  
+  # Manifest sempre atualizado
+  <FilesMatch "manifest\.json$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  
+  # Imagens podem ter cache
+  <FilesMatch "\.(png|jpg|jpeg|gif|svg|ico)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>

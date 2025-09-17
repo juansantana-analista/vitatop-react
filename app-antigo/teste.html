@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apucarana Hoje - Portal de Notícias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .breaking-news {
+            background: #ff4444;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .article-main {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #ddd, #eee);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #666;
+            border: 2px dashed #ccc;
+            position: relative;
+        }
+
+        .article-image::after {
+            font-size: 16px;
+        }
+
+        .article-content {
+            padding: 30px;
+        }
+
+        .article-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .article-meta span {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #1e3c72;
+            line-height: 1.3;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: 500;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #1e3c72;
+            border-radius: 5px;
+        }
+
+        .article-text {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .article-text p {
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            background: #f8f9fa;
+            border-left: 4px solid #ffd700;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 18px;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-section h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .news-item a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .news-item a:hover {
+            color: #1e3c72;
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .tags {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #1e3c72;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Apucarana <span>HOJE</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#local">Local</a></li>
+                        <li><a href="#educacao">Educação</a></li>
+                        <li><a href="#saude">Saúde</a></li>
+                        <li><a href="#esportes">Esportes</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="breaking-news">
+        🚨 ÚLTIMAS NOTÍCIAS: Prefeitura anuncia medidas de segurança nas escolas municipais
+    </div>
+
+    <div class="container">
+        <main>
+            <article class="article-main">
+                <div class="article-image">
+                    <img src="https://cdn.tnonline.com.br/img/Artigo-Destaque/720000/O-curso-totalmente-gratuito-tem-a-duracao-de-dois--00723691-0-202301241307.jpg?xid=897386" alt="Incidente no Colégio Santos Dumont mobiliza autoridades" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                
+                <div class="article-content">
+                    <div class="article-meta">
+                        <span>📅 27 de Junho, 2025</span>
+                        <span>👤 Redação Apucarana Hoje</span>
+                        <span>🏫 Educação</span>
+                    </div>
+
+                    <h1>Após briga em Colégio Santos Dumont, Prefeitura aprova compra de joelheiras para alunos</h1>
+
+                    <div class="lead">
+                        Incidente envolvendo estudante de 17 anos resulta em hospitalização de colega e mobiliza autoridades educacionais para implementar medidas preventivas urgentes na rede municipal de ensino.
+                    </div>
+
+                    <div class="article-text">
+                        <p>A Prefeitura de Apucarana anunciou ontem a aprovação emergencial para aquisição de equipamentos de proteção individual, incluindo joelheiras, para estudantes da rede municipal de ensino. A decisão foi tomada após um incidente ocorrido no Colégio Santos Dumont que resultou na hospitalização de um estudante.</p>
+
+                        <p>O caso envolveu Matheus Viana, de 17 anos, que durante uma discussão no pátio da escola acabou desferindo um chute no joelho de um colega de classe. A vítima, cujo nome não foi divulgado por se tratar de menor de idade, foi imediatamente socorrida e encaminhada ao Hospital da Providência, onde permaneceu em observação por 24 horas.</p>
+
+                        <div class="quote">
+                            "Não podemos permitir que situações como essa se repitam em nossas escolas. A segurança dos nossos estudantes é prioridade absoluta", declarou a Secretária de Educação.
+                        </div>
+
+                        <p>Segundo relatos de testemunhas, a briga teria começado devido a um desentendimento durante o intervalo das aulas. O jovem Matheus, que cursa o 2º ano do ensino médio, foi suspenso por 10 dias e deverá participar de atividades socioeducativas junto ao Conselho Tutelar.</p>
+
+                        <p>A direção da escola informou que ambos os estudantes não possuíam histórico de problemas disciplinares graves. O caso está sendo acompanhado pelos pais das duas famílias, que chegaram a um acordo para que não houvesse registro de boletim de ocorrência.</p>
+
+                        <p><strong>Medidas Preventivas</strong></p>
+
+                        <p>Como resposta ao incidente, a Prefeitura aprovou um pacote de medidas que inclui:</p>
+
+                        <p>• Aquisição de 2.500 joelheiras para distribuição nas escolas municipais<br>
+                        • Contratação de dois psicólogos escolares adicionais<br>
+                        • Implementação de programa de mediação de conflitos<br>
+                        • Instalação de câmeras de segurança em todas as áreas comuns</p>
+
+                        <p>O investimento total aprovado pela Câmara Municipal foi de R$ 180 mil, recursos que serão destinados especificamente para equipamentos de proteção e melhorias na segurança escolar.</p>
+
+                        <p>A estudante que foi hospitalizada recebeu alta médica na manhã de ontem e já retornou às atividades escolares. Segundo boletim médico, não houve fraturas, mas foi constatada uma lesão ligamentar que exigirá fisioterapia por algumas semanas.</p>
+
+                        <p>O Colégio Santos Dumont, que atende aproximadamente 800 estudantes, deve receber as primeiras joelheiras ainda esta semana, priorizando as turmas do ensino médio onde ocorreu o incidente.</p>
+                    </div>
+
+                    <div class="tags">
+                        <span class="tag">Educação</span>
+                        <span class="tag">Segurança Escolar</span>
+                        <span class="tag">Apucarana</span>
+                        <span class="tag">Santos Dumont</span>
+                        <span class="tag">Prefeitura</span>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>📰 Outras Notícias</h3>
+                    <div class="news-item">
+                        <h4><a href="#">Secretaria de Saúde amplia horário de atendimento nas UBS</a></h4>
+                        <div class="news-date">26 Jun 2025</div>
+                    </div>
+                    <div class="news-item">
+                        <h4><a href="#">Nova ciclovia será inaugurada na Avenida Central</a></h4>
+                        <div class="news-date">25 Jun 2025</div>
+                    </div>
+                    <div class="news-item">
+                        <h4><a href="#">Festival de Inverno movimenta centro da cidade</a></h4>
+                        <div class="news-date">24 Jun 2025</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>🎯 Destaques</h3>
+                    <div class="news-item">
+                        <h4><a href="#">Câmara aprova orçamento para 2026</a></h4>
+                        <div class="news-date">27 Jun 2025</div>
+                    </div>
+                    <div class="news-item">
+                        <h4><a href="#">Novo hospital veterinário público será construído</a></h4>
+                        <div class="news-date">26 Jun 2025</div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>☁️ Clima</h3>
+                    <p><strong>Hoje:</strong> 18°C / 25°C</p>
+                    <p>Parcialmente nublado</p>
+                    <p><strong>Amanhã:</strong> Sol com algumas nuvens</p>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Apucarana Hoje - Portal de Notícias. Todos os direitos reservados.</p>
+            <p>Jornalismo responsável e comprometido com a verdade</p>
+        </div>
+    </footer>
+</body>
+</html>

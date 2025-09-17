@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+         />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#00591F" />
+      <!-- Your app title -->
+      <title>VITATOP</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css?v=1.1.8" />
+      <link rel="stylesheet" href="css/carrinho.css?v=1.1.8" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="home" class="page color-theme-blue">
+               <!-- NAV TOPO-->
+               <div class="top-nav">
+                  <div class="left">
+                     <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+                  </div>
+                  <!-- Agrupe os ícones em uma div -->
+                  <div class="right-icons">
+                     <!-- Botão de Notificações -->
+                     <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                        <i class="mdi mdi-bell-outline"></i>
+                     </div>
+                     <!-- Botão do Carrinho -->
+                     <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                        <i class="mdi mdi-cart-outline"></i>
+                     </div>
+                  </div>
+               </div>
+               <!-- Formulário de pesquisa modificado -->
+               <form style="background-color: #f7f9fa" onsubmit="return false;">
+               <input 
+                  id="search" 
+                  placeholder="Qual produto você procura?" 
+                  type="text" 
+                  autocomplete="off"
+                  enterkeyhint="search"
+               />
+               <i class="icone-busca mdi mdi-magnify"></i>
+               </form>
+               <!-- Scrollable page content -->
+               <div class="page-content" style="background-color: #f7f9fa">
+                  <div class="block no-margin-top">
+                     <!-- Swiper -->
+                     <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                           <!-- Banners will be dynamically inserted here -->
+                        </div>
+                        <div class="swiper-pagination"></div>
+                     </div>
+                     <!-- Categories container -->
+                     <div class="categories-container">
+                        <!-- Categories title section -->
+                        <div class="categories-header">
+                           <h4 class="categories-title">Categorias</h4>
+                        </div>
+                        <!-- Categories scrollable wrapper with arrows -->
+                        <div class="categories-scroll-container">
+                           <button class="scroll-arrow scroll-left">
+                           <i class="mdi mdi-chevron-left"></i>
+                           </button>
+                           <div class="categories-scroll-wrapper">
+                              <div class="categories-grid" id="container-categorias">
+                                 <!-- Categories will be dynamically inserted here -->
+                              </div>
+                           </div>
+                           <button class="scroll-arrow scroll-right">
+                           <i class="mdi mdi-chevron-right"></i>
+                           </button>
+                        </div>
+                        <!-- Scroll indicator dots -->
+                        <div class="scroll-indicator">
+                           <div class="scroll-dots"></div>
+                        </div>
+                     </div>
+                     <!-- Products container -->
+                     <div
+                        id="container-produtos"
+                        class="margin-top"
+                        >
+                        <!-- ITEM SKELETON - Updated to single-line layout -->
+                        <div class="item-card loading-skeleton">
+                           <a href="/detalhes/" class="item">
+                              <div class="img-container skeleton-effect-wave"></div>
+                              <div class="nome-rating">
+                                 <span
+                                    style="width: 80%"
+                                    class="gelo skeleton-effect-wave skeleton-block color-gray"
+                                    ></span>
+                                 <div class="star-rating" style="margin: 5px 0;">
+                                    <span
+                                       style="width: 100px; height: 16px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                                 <div class="price">
+                                    <span
+                                       style="width: 80px; height: 20px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                        <!-- ITEM SKELETON -->
+                        <div class="item-card loading-skeleton">
+                           <a href="/detalhes/" class="item">
+                              <div class="img-container skeleton-effect-wave"></div>
+                              <div class="nome-rating">
+                                 <span
+                                    style="width: 80%"
+                                    class="gelo skeleton-effect-wave skeleton-block color-gray"
+                                    ></span>
+                                 <div class="star-rating" style="margin: 5px 0;">
+                                    <span
+                                       style="width: 100px; height: 16px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                                 <div class="price">
+                                    <span
+                                       style="width: 80px; height: 20px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                        <!-- ITEM SKELETON -->
+                        <div class="item-card loading-skeleton">
+                           <a href="/detalhes/" class="item">
+                              <div class="img-container skeleton-effect-wave"></div>
+                              <div class="nome-rating">
+                                 <span
+                                    style="width: 80%"
+                                    class="gelo skeleton-effect-wave skeleton-block color-gray"
+                                    ></span>
+                                 <div class="star-rating" style="margin: 5px 0;">
+                                    <span
+                                       style="width: 100px; height: 16px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                                 <div class="price">
+                                    <span
+                                       style="width: 80px; height: 20px"
+                                       class="gelo skeleton-effect-wave skeleton-block"
+                                       ></span>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
+                     <br /><br /><br /><br /><br /><br /><br /><br />
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js?v=1.1.8"></script>
+      <script type="text/javascript" src="js/funcoes.js?v=1.1.8"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

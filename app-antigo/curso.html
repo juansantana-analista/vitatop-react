@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#FF4B00" />
+    <!-- Your app title -->
+    <title>G3 PAY</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/index.css" />
+    
+    <link rel="stylesheet" href="css/carrinho.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <!--Ícones Material Design-->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+    <!-- Icones do Remix icon-->
+    <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+  </head>
+
+  <body>
+    <!-- App root element -->
+    <div id="app">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Initial Page, "data-name" contains page name -->
+        <div data-name="curso" class="page color-theme-blue">
+          <!-- NAV TOPO-->
+          <div class="top-nav">
+            <div class="left">
+              <a
+                href="#"
+                class="link panel-open btn-novo"
+                data-panel="#panel-nested"
+              >
+                <i class="mdi mdi-menu"></i>
+              </a>
+            </div>
+            <img src="img/logo-nav.png" class="title-logo" width="110px" />
+            <a href="/informacoes/">
+              <!--<i class="mdi mdi-information-variant"></i>-->
+            </a>
+          </div>
+          <!-- Scrollable page content -->
+
+          
+          <div class="page-content" style="background-color: #f7f9fa; padding-bottom: 160px">
+            <div class="block">
+              <h2 class="titulo-pagina">Cursos</h2>
+              <div class="header-image"></div>
+              
+            <div class="categorias-curso" id="categoriaList">
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app-->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script src="cordova.js"></script>
+  </body>
+</html>

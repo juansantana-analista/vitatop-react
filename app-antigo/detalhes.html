@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Color theme for statusbar (Android only) -->
+    <meta name="theme-color" content="#FF4B00" />
+    <!-- Your app title -->
+    <title>Template Tab</title>
+    <!-- Path to Framework7 Library Bundle CSS -->
+    <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+    <!-- CSS PERSONALIZADO PARA MENU-->
+    <link rel="stylesheet" href="css/index.css" />
+    <!--Ícones Material Design-->
+    <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+    <!-- Icones do Remix icon-->
+    <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+  </head>
+
+  <body>
+    <!-- App root element -->
+    <div id="app">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+        <!-- Initial Page, "data-name" contains page name -->
+        <div data-name="detalhes" class="page color-theme-blue">
+          <!-- Scrollable page content -->
+          <div class="page-content">
+            <div class="container">
+              <div class="header">
+                <div class="back-button">
+                  <a href="/home/" id="voltarProdutos">
+                    <i class="fas fa-arrow-left"></i
+                  ></a>
+                </div>
+                <div class="product-code">
+                  Código <span id="idProduto"></span>
+                </div>
+                <div class="icons">
+                  <i class="mdi mdi-cart-outline"></i>
+                </div>
+              </div>
+
+              <div class="product-gallery-container">
+                <!-- Carrossel de imagens principal -->
+                <div id="product-gallery-main" class="swiper gallery-main">
+                  <div class="swiper-wrapper">
+                    <!-- Os slides serão adicionados dinamicamente via JavaScript -->
+                  </div>
+                  <!-- Adicione a paginação e navegação -->
+                  <div class="swiper-pagination"></div>
+                  <div class="swiper-button-next"></div>
+                  <div class="swiper-button-prev"></div>
+                </div>
+
+                <!-- Carrossel de miniaturas -->
+                <div
+                  id="product-gallery-thumbs"
+                  class="swiper gallery-thumbs mt-3"
+                >
+                  <div class="swiper-wrapper" style="padding-left: 10px">
+                    <!-- As miniaturas serão adicionadas dinamicamente via JavaScript -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="badges">
+                <div class="badge promotion">Promoção</div>
+              </div>
+
+              <h1 class="product-title" id="nome-detalhe"></h1>
+
+              <div class="stock-status">Últimas unidades</div>
+              <div class="progress-bar">
+                <div class="fill"></div>
+              </div>
+
+              <!-- Benefícios - o conteúdo será substituído dinamicamente -->
+              <div class="benefits">
+                <div class="benefits-title">
+                  Benefícios do Produto
+                  <i class="fas fa-capsules"></i>
+                </div>
+                <!-- Os itens de benefícios serão adicionados dinamicamente -->
+              </div>
+
+              <!-- Contra Indicações - o conteúdo será substituído dinamicamente -->
+              <div class="contra-indicacoes">
+                <div class="contra-indicacoes-title">
+                  Contra Indicação
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <!-- Os itens de Contra Indicações serão adicionados dinamicamente -->
+              </div>
+
+              <div class="pricing">
+                <div class="price-row">
+                  <div class="price-label">Pague</div>
+                  <div>
+                    <span class="original-price" id="precoOriginal"></span>
+                    <span class="current-price" id="precoDesconto"></span>
+                  </div>
+                </div>
+
+                <div class="price-row with-divider">
+                  <div class="price-label">Revenda</div>
+                  <div id="precoRevenda"></div>
+                </div>
+
+                <div class="price-row with-divider">
+                  <div class="price-label"><b style="font-size: 18px;">Lucre</b></div>
+                  <div class="profit" id="precoLucro"></div>
+                </div>
+              </div>
+
+              <div class="share-button-produto compartilharProduto">
+                <button id="compartilharProduto">
+                  <i class="fas fa-share-alt"></i> Divulgar produto
+                </button>
+              </div>
+
+              <div style="height: 70px"></div>
+              <!-- Spacer for fixed button -->
+
+              <div class="cart-button" id="addCarrinho">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao carrinho
+              </div>
+            </div>
+
+            <!-- Modal para detalhes de benefício - Estilo original -->
+            <div class="modal" id="benefitModal">
+              <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2 class="modal-title" id="modalTitle">Benefício</h2>
+                <div class="modal-description" id="modalDescription"></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library Bundle JS-->
+    <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+    <!-- Roteamento do app-->
+    <script type="text/javascript" src="js/routes.js"></script>
+    <script src="cordova.js"></script>
+  </body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#00591F" />
+      <!-- Your app title -->
+      <title>VitaTop</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css" />
+      <link rel="stylesheet" href="css/gestao.css" />
+      <link rel="stylesheet" href="css/perfil.css" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="perfil" class="page color-theme-blue">
+            <!-- NAV TOPO-->
+            <div class="top-nav">
+               <div class="left">
+                  <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+               </div>
+               <!-- Agrupe os ícones em uma div -->
+               <div class="right-icons">
+                  <!-- Botão de Notificações -->
+                  <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                     <i class="mdi mdi-bell-outline"></i>
+                  </div>
+                  <!-- Botão do Carrinho -->
+                  <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                     <i class="mdi mdi-cart-outline"></i>
+                  </div>
+               </div>
+            </div>
+
+               <!-- Scrollable page content -->
+               <div class="page-content" style="background-color: #f7f9fa; padding-bottom: 160px">
+                  
+                  <!-- Profile Header -->
+                  <div class="profile-header">
+                     <div class="profile-avatar-container">
+                        <div class="profile-avatar" id="profileAvatar">
+                           <img src="img/user.jpg" alt="Foto do perfil" id="profileImage">
+                           <div class="avatar-overlay">
+                              <i class="mdi mdi-camera"></i>
+                           </div>
+                        </div>
+                        <div class="profile-status online" id="editarFoto">
+                           <i class="mdi mdi-pencil"></i>
+                        </div>
+                     </div>
+                     <div class="profile-info">
+                        <h2 class="profile-name" id="usuarioNome"></h2>
+                        <p class="profile-email" id="emailUsuario"></p>
+                        <div class="profile-badge">
+                           <span class="level-badge gold">Distribuidor Independente</span>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Profile Options -->
+                  <div class="dashboard-section">
+                     <h2 class="section-title">Configurações da Conta</h2>
+                     <div class="profile-options">
+                        <div class="option-item" id="editarPerfil">
+                           <div class="option-icon">
+                              <i class="mdi mdi-account-edit"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Editar Perfil</div>
+                              <div class="option-subtitle">Nome, telefone</div>
+                           </div>
+                           <div class="option-arrow">
+                              <i class="mdi mdi-chevron-right"></i>
+                           </div>
+                        </div>
+
+                        <div class="option-item" id="alterarSenha">
+                           <div class="option-icon">
+                              <i class="mdi mdi-lock-outline"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Alterar Senha</div>
+                              <div class="option-subtitle">Manter sua conta segura</div>
+                           </div>
+                           <div class="option-arrow">
+                              <i class="mdi mdi-chevron-right"></i>
+                           </div>
+                        </div>
+                        <!--
+                        <div class="option-item" id="enderecosEntrega">
+                           <div class="option-icon">
+                              <i class="mdi mdi-map-marker-outline"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Endereços de Entrega</div>
+                              <div class="option-subtitle">Gerenciar endereços salvos</div>
+                           </div>
+                           <div class="option-arrow">
+                              <i class="mdi mdi-chevron-right"></i>
+                           </div>
+                        </div>
+
+                        <div class="option-item" id="notificacoesPref">
+                           <div class="option-icon">
+                              <i class="mdi mdi-bell-outline"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Notificações</div>
+                              <div class="option-subtitle">Configurar alertas</div>
+                           </div>
+                           <div class="option-toggle">
+                              <label class="toggle">
+                                 <input type="checkbox" checked>
+                                 <span class="slider"></span>
+                              </label>
+                           </div>
+                        </div>
+                        -->
+
+                     </div>
+                  </div>
+
+                  <!-- Support Section -->
+                  <div class="dashboard-section" id="suporteClick">
+                     <h2 class="section-title">Suporte</h2>
+                     <div class="profile-options">
+                        <div class="option-item" id="ajudaSuporte">
+                           <div class="option-icon">
+                              <i class="mdi mdi-help-circle-outline"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Ajuda e Suporte</div>
+                              <div class="option-subtitle">FAQ, contato</div>
+                           </div>
+                           <div class="option-arrow">
+                              <i class="mdi mdi-chevron-right"></i>
+                           </div>
+                        </div>
+
+                        <div class="option-item" id="sobreApp">
+                           <div class="option-icon">
+                              <i class="mdi mdi-information-outline"></i>
+                           </div>
+                           <div class="option-content">
+                              <div class="option-title">Sobre o App</div>
+                              <div class="option-subtitle">Versão <span id="versaoApp"></span></div>
+                           </div>
+                           <div class="option-arrow">
+                              <i class="mdi mdi-chevron-right"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <!-- Logout Section -->
+                  <div class="dashboard-section">
+                     <div class="logout-section">
+                        <button class="logout-button" id="sairAgora">
+                           <i class="mdi mdi-logout"></i>
+                           <span>Sair da Conta</span>
+                        </button>
+                     </div>
+                  </div>
+
+<input type="file" accept="image/*" id="inputFoto" style="display:none" capture="environment">
+<input type="file" accept="image/*" id="inputFotoGaleria" style="display:none">
+
+                  <!-- INÍCIO POPUP EDITAR LINK -->
+                  <div class="popup popup-editar">
+                     <div class="view popup-view">
+                        <div class="page">
+                           <div class="top-nav">
+                              <div class="left">
+                                 <a href="#" class="link btn-novo popup-close">
+                                 <i class="mdi mdi-arrow-left"></i>
+                                 </a>
+                              </div>
+                              <strong class="title-descricao">
+                                 <i class="ri-pencil-fill"></i> Editar Perfil
+                              </strong>
+                              <div style="width: 30px;"></div>
+                           </div>
+                           <div class="page-content">
+
+                           <div class="modal-body">
+                              <div class="form-group">
+                                 <label>Nome Completo</label>
+                                 <input type="text" class="form-input" id="editNome" placeholder="Digite seu nome completo">
+                              </div>
+                              <div class="form-group">
+                                 <label>Telefone</label>
+                                 <input type="tel" class="form-input" id="editTelefone" placeholder="(00) 00000-0000">
+                              </div>
+                              <div class="form-group">
+                                 <label>E-mail</label>
+                                 <input type="email" class="form-input" id="editEmail" placeholder="seu@email.com" readonly>
+                                 <small>O e-mail não pode ser alterado</small>
+                              </div>
+                              <div class="form-group">
+                                 <label>Documento</label>
+                                 <input type="text" class="form-input" id="editDocumento" readonly>
+                                 <small>O documento não pode ser alterado</small>
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                              <button class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                              <button class="btn btn-primary" id="salvarPerfil">
+                                 <i class="mdi mdi-check"></i>
+                                 Salvar Alterações
+                              </button>
+                           </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- FIM POPUP EDITAR LINK -->
+
+                  <!-- INÍCIO POPUP ALTERAR SENHA -->
+                  <div class="popup popup-senha">
+                     <div class="view popup-view">
+                        <div class="page">
+                           <div class="top-nav">
+                              <div class="left">
+                                 <a href="#" class="link btn-novo popup-close">
+                                 <i class="mdi mdi-arrow-left"></i>
+                                 </a>
+                              </div>
+                              <strong class="title-descricao">
+                                 <i class="ri-git-repository-private-fill"></i>Alterar Senha
+                              </strong>
+                              <div style="width: 30px;"></div>
+                           </div>
+                           <div class="page-content">
+
+                           <div class="modal-body">
+                              <div class="form-group">
+                                 <label>Senha Atual</label>
+                                 <input type="password" class="form-input" id="senhaAtual" placeholder="********">
+                              </div>
+                              <div class="form-group">
+                                 <label>Nova Senha</label>
+                                 <input type="password" class="form-input" id="novaSenha" placeholder="********">
+                              </div>
+                              <div class="form-group">
+                                 <label>Confirme a Senha</label>
+                                 <input type="password" class="form-input" id="reNovaSenha" placeholder="********">
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                              <button class="btn btn-secondary" data-dismiss="modal-senha">Cancelar</button>
+                              <button class="btn btn-primary" id="salvarSenha">
+                                 <i class="mdi mdi-check"></i>
+                                 Salvar Senha
+                              </button>
+                           </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- FIM POPUP ALTERAR SENHA -->
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

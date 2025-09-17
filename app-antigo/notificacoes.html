@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+         />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#FF4B00" />
+      <!-- Your app title -->
+      <title>G3 PAY</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css" />
+      <link rel="stylesheet" href="css/carrinho.css" />
+      <link rel="stylesheet" href="css/dashboard.css" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+         <!-- Initial Page, "data-name" contains page name -->
+         <div data-name="pedidos" class="page color-theme-blue">
+               <!-- NAV TOPO-->
+               <div class="top-nav">
+                  <div class="left">
+                     <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+                  </div>
+                  <!-- Agrupe os ícones em uma div -->
+                  <div class="right-icons">
+                     <!-- Botão de Notificações -->
+                     <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                        <i class="mdi mdi-bell-outline"></i>
+                     </div>
+                     <!-- Botão do Carrinho -->
+                     <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                        <i class="mdi mdi-cart-outline"></i>
+                     </div>
+                  </div>
+               </div>
+               <!-- Scrollable page content -->
+               <div
+                  class="page-content"
+                  style="background-color: #f7f9fa; padding-bottom: 160px"
+                  >
+                  <!-- Dashboard Header -->
+                  <div class="dashboard-header">
+                     <h1>Notificações</h1>
+                     <p>Fique por dentro de todas as novidades</p>
+                  </div>
+                  <div class="block">
+                     <div
+                        class="container-notificacao"
+                        id="container-notificacao"
+                        ></div>
+                  </div>
+               </div>
+               <!-- INÍCIO POPUP NOTIFICAÇÃO -->
+               <div class="popup popup-detalhes-notificacao">
+                  <div class="view popup-view">
+                     <div class="page">
+                        <div class="top-nav">
+                           <div class="left">
+                              <a href="#" class="link popup-close btn-novo">
+                              <i class="mdi mdi-arrow-left"></i>
+                              </a>
+                           </div>
+                           <strong class="title-descricao">
+                           Notificação
+                           </strong>
+                           <a href="#" class="btn-notifi">
+                           <i class="mdi mdi-bell"></i>
+                           </a>
+                        </div>
+                        <div class="popup-content">
+                           <div class="popup-body">
+                              <div class="notification-details">
+                                 <h3 id="title-pop"></h3>
+                                 <p id="descricao-pop"></p>
+                              </div>
+                              <div class="notification-metadata">
+                                 <div class="metadata-item">
+                                    <div class="metadata-item-label">Data</div>
+                                    <div class="metadata-item-value" id="data-pop"></div>
+                                 </div>
+                                 <div class="metadata-item">
+                                    <div class="metadata-item-label">Status</div>
+                                    <div class="metadata-item-value">Concluído</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- TAB BAR-->
+                        <div class="bottom-info">
+                           <div class="popup-actions">
+                              <button class="action-btn-pop secondary link popup-close">Fechar</button>
+                              <button class="action-btn-pop">Mais Detalhes</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- FIM POPUP NOTIFICAÇÃO -->
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

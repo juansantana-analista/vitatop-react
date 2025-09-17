@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags-->
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <!-- Color theme for statusbar (Android only) -->
+  <meta name="theme-color" content="#00591F" />
+  <!-- Your app title -->
+  <title>Minha Loja - VitaTop</title>
+  <!-- Path to Framework7 Library Bundle CSS -->
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+  <!--Ícones Material Design-->
+  <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+  <!-- Icones do Remix icon-->
+  <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+</head>
+
+<body>
+  <!-- App root element -->
+  <div id="app">
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main">
+      <!-- Initial Page, "data-name" contains page name -->
+      <div data-name="minha-loja" class="page color-theme-blue">        
+            <!-- NAV TOPO-->
+            <div class="top-nav">
+               <div class="left">
+                  <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+               </div>
+               <!-- Agrupe os ícones em uma div -->
+               <div class="right-icons">
+                  <!-- Botão de Notificações -->
+                  <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                     <i class="mdi mdi-bell-outline"></i>
+                  </div>
+                  <!-- Botão do Carrinho -->
+                  <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                     <i class="mdi mdi-cart-outline"></i>
+                  </div>
+               </div>
+            </div>
+
+        <!-- Scrollable page content -->
+        <div class="page-content" style="background-color: #f7f9fa; padding-bottom: 160px">
+          
+          <!-- Tela de Bem-vindo (para quem não tem loja) -->
+          <div id="welcome-screen" class="welcome-container display-none">
+            <div class="welcome-card">
+              <div class="welcome-icon">
+                <i class="mdi mdi-store"></i>
+              </div>
+              <h2>Crie sua Loja Personalizada!</h2>
+              <p>Tenha sua própria loja online e aumente suas vendas com um espaço totalmente personalizado.</p>
+              
+              <div class="benefits-list">
+                <div class="benefit-item">
+                  <i class="mdi mdi-check-circle"></i>
+                  <span>Loja com seu nome</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="mdi mdi-check-circle"></i>
+                  <span>Banners personalizados</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="mdi mdi-check-circle"></i>
+                  <span>Link exclusivo para compartilhar</span>
+                </div>
+                <div class="benefit-item">
+                  <i class="mdi mdi-check-circle"></i>
+                  <span>Aumente suas vendas</span>
+                </div>
+              </div>
+
+              <button class="btn-criar-loja" id="btnCriarLoja">
+                <i class="mdi mdi-plus"></i>
+                Criar Minha Loja
+              </button>
+            </div>
+          </div>
+
+          <!-- Formulário de Criação da Loja -->
+          <div id="create-form" class="create-container display-none">
+            <div class="step-indicator">
+              <div class="step active" data-step="1">
+                <span>1</span>
+                <label>Informações Básicas</label>
+              </div>
+              <div class="step" data-step="2">
+                <span>2</span>
+                <label>Finalizar</label>
+              </div>
+            </div>
+
+            <!-- Passo 1: Informações Básicas -->
+            <div class="step-content" id="step-1">
+              <div class="form-card">
+                <div class="form-header">
+                  <i class="mdi mdi-store-outline"></i>
+                  <h3>Como quer chamar sua loja?</h3>
+                  <p>Escolha um nome atrativo e fácil de lembrar</p>
+                </div>
+                <div class="form-group">
+                  <label for="nomeLoja">Nome da Loja</label>
+                  <input type="text" id="nomeLoja" placeholder="Ex: Loja da Maria, Suplementos do João..." maxlength="50">
+                  <small>Máximo 50 caracteres</small>
+                </div>
+                <div class="form-group" id="grupoCorPrincipal" style="display:none;">
+                  <div class="color-picker-group">
+                    <label class="color-picker-label" for="corPrincipal">Cor Principal</label>
+                    <input type="color" id="corPrincipal" value="#FF5733" style="display:none;">
+                    <div class="color-preview" id="previewCorPrincipal" tabindex="0" style="cursor:pointer;">#FF5733</div>
+                    <input type="text" id="corPrincipalHex" maxlength="7" style="width:120px; text-transform:uppercase;" placeholder="#FF5733">
+                  </div>
+                </div>
+                <div class="form-group" id="grupoCorSecundaria" style="display:none;">
+                  <div class="color-picker-group">
+                    <label class="color-picker-label" for="corSecundaria">Cor Secundária</label>
+                    <input type="color" id="corSecundaria" value="#C70039" style="display:none;">
+                    <div class="color-preview" id="previewCorSecundaria" tabindex="0" style="cursor:pointer;">#C70039</div>
+                    <input type="text" id="corSecundariaHex" maxlength="7" style="width:120px; text-transform:uppercase;" placeholder="#C70039">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="whatsappLoja">Whatsapp da Loja</label>
+                  <input type="text" id="whatsappLoja" class="whatsapp-mask" placeholder="Ex: (99) 99999-9999" maxlength="20">
+                </div>
+                <div class="preview-card">
+                  <div class="preview-header">
+                    <i class="mdi mdi-eye"></i>
+                    <span>Prévia</span>
+                  </div>
+                  <div class="preview-content">
+                    <div class="preview-logo">
+                      <i class="mdi mdi-store"></i>
+                    </div>
+                    <h4 id="previewNome">Nome da sua loja aparecerá aqui</h4>
+                    <span class="preview-tag">Distribuidor VitaTop</span>
+                  </div>
+                </div>
+                <button class="btn-next" id="btnStep1Next" disabled>
+                  Próximo Passo
+                  <i class="mdi mdi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+
+
+            <!-- Passo 2: Finalizar -->
+            <div class="step-content display-none" id="step-2">
+              <div class="form-card">
+                <div class="form-header success">
+                  <i class="mdi mdi-check-circle"></i>
+                  <h3>Quase pronto!</h3>
+                  <p>Revise as informações da sua loja</p>
+                </div>
+
+                <div class="summary-card">
+                  <div class="summary-item">
+                    <label>Nome da Loja:</label>
+                    <span id="summaryNome">-</span>
+                  </div>
+                  <div class="summary-item">
+                    <label>Link da Loja:</label>
+                    <div class="link-preview">
+                      <span id="linkLoja">vitatop.com/loja/</span>
+                      <button class="btn-copy-link" id="btnCopyLink">
+                        <i class="mdi mdi-content-copy"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn-back" id="btnStep2Back">
+                    <i class="mdi mdi-arrow-left"></i>
+                    Voltar
+                  </button>
+                  <button class="btn-create" id="btnFinalizar">
+                    <i class="mdi mdi-rocket"></i>
+                    Criar Minha Loja
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tela de Gerenciamento da Loja (para quem já tem loja) -->
+          <div id="manage-screen" class="manage-container display-none">
+            
+            <!-- Header da Loja -->
+            <div class="loja-header">
+              <div class="loja-banner" id="lojaBannerAtual">
+                <img id="bannerAtual" src="" alt="Banner da loja">
+                <div class="loja-overlay">
+                  <h2 id="nomeLojaAtual">Nome da Loja</h2>
+                  <span class="loja-tag">Distribuidor VitaTop</span>
+                </div>
+              </div>
+              <div class="loja-actions">
+                <button class="btn-share-loja" id="btnCompartilharLoja">
+                  <i class="mdi mdi-share"></i>
+                  Compartilhar
+                </button>
+                <button class="btn-view-loja" id="btnVisualizarLoja">
+                  <i class="mdi mdi-eye"></i>
+                  Visualizar
+                </button>
+              </div>
+            </div>
+
+            <!-- Estatísticas Rápidas -->
+            <div class="summary-cards">
+              <div class="summary-card">
+                <div class="card-icon"><i class="mdi mdi-eye"></i></div>
+                <div class="card-title">Visualizações</div>
+                <div class="card-value" id="visualizacoes">0</div>
+              </div>
+              <div class="summary-card">
+                <div class="card-icon"><i class="mdi mdi-cart"></i></div>
+                <div class="card-title">Vendas</div>
+                <div class="card-value" id="vendas">0</div>
+              </div>
+            </div>
+
+            <!-- Categorias Selecionadas -->
+            <div class="categorias-selecionadas-display" id="categoriasSelecionadasDisplay" style="display: none;">
+              <h4 class="section-title">
+                <i class="mdi mdi-tag-multiple"></i>
+                Categorias da Loja
+              </h4>
+              <div class="categorias-tags-display" id="categoriasTagsDisplay">
+                <!-- Tags das categorias selecionadas serão exibidas aqui -->
+              </div>
+            </div>
+
+            <!-- Opções de Gerenciamento -->
+            <div class="management-options">
+              <h3 class="section-title">
+                <i class="mdi mdi-cog"></i>
+                Personalizar Loja
+              </h3>
+
+              <div class="option-card" id="editarNomeLoja">
+                <div class="option-icon">
+                  <i class="mdi mdi-store-edit"></i>
+                </div>
+                <div class="option-content">
+                  <h4>Informações Básicas</h4>
+                  <p>Nome da Loja, Cores e Whatsapp</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="mdi mdi-chevron-right"></i>
+                </div>
+              </div>
+
+              <div class="option-card" id="gerenciarBanners" style="display:none;">
+                <div class="option-icon">
+                  <i class="mdi mdi-image-multiple"></i>
+                </div>
+                <div class="option-content">
+                  <h4>Banners</h4>
+                  <p>Adicionar e gerenciar banners</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="mdi mdi-chevron-right"></i>
+                </div>
+              </div>
+
+              <div class="option-card" id="alterarLogoLoja" style="display:none;">
+                <div class="option-icon">
+                  <i class="mdi mdi-image"></i>
+                </div>
+                <div class="option-content">
+                  <h4>Logo da Loja</h4>
+                  <p>Alterar logo (800x200 recomendado)</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="mdi mdi-chevron-right"></i>
+                </div>
+              </div>
+
+              <div class="option-card" id="gerenciarCategorias">
+                <div class="option-icon">
+                  <i class="mdi mdi-tag-multiple"></i>
+                </div>
+                <div class="option-content">
+                  <h4>Categorias</h4>
+                  <p>Selecionar categorias de produtos</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="mdi mdi-chevron-right"></i>
+                </div>
+              </div>
+
+              <div class="option-card" id="configuracoes">
+                <div class="option-icon">
+                  <i class="mdi mdi-cog"></i>
+                </div>
+                <div class="option-content">
+                  <h4>Configurações</h4>
+                  <p>Outras configurações da loja</p>
+                </div>
+                <div class="option-arrow">
+                  <i class="mdi mdi-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popup para Editar Nome da Loja -->
+          <div class="popup popup-editar-nome">
+            <div class="view popup-view">
+              <div class="page">
+                <div class="top-nav">
+                  <div class="left">
+                    <a href="#" class="link btn-novo popup-close">
+                      <i class="mdi mdi-arrow-left"></i>
+                    </a>
+                  </div>
+                  <strong class="title-descricao">Editar Informações Básicas</strong>
+                  <div style="width: 30px;"></div>
+                </div>
+                <div class="page-content">
+                  <div class="block">
+                    <div class="form-card">
+                      <div class="form-group">
+                        <label for="novoNomeLoja">Nome da Loja</label>
+                        <input type="text" id="novoNomeLoja" placeholder="Digite o novo nome" maxlength="50">
+                        <small>Máximo 50 caracteres</small>
+                      </div>
+                      <div class="form-group" id="grupoEditarCorPrincipal" style="display:none;">
+                        <div class="color-picker-group">
+                          <label class="color-picker-label" for="novaCorPrincipal">Cor Principal</label>
+                          <input type="color" id="novaCorPrincipal" value="#FF5733" style="display:none;">
+                          <div class="color-preview" id="previewNovaCorPrincipal" tabindex="0" style="cursor:pointer;">#FF5733</div>
+                          <input type="text" id="novaCorPrincipalHex" maxlength="7" style="width:120px; text-transform:uppercase;" placeholder="#FF5733">
+                        </div>
+                      </div>
+                      <div class="form-group" id="grupoEditarCorSecundaria" style="display:none;">
+                        <div class="color-picker-group">
+                          <label class="color-picker-label" for="novaCorSecundaria">Cor Secundária</label>
+                          <input type="color" id="novaCorSecundaria" value="#C70039" style="display:none;">
+                          <div class="color-preview" id="previewNovaCorSecundaria" tabindex="0" style="cursor:pointer;">#C70039</div>
+                          <input type="text" id="novaCorSecundariaHex" maxlength="7" style="width:120px; text-transform:uppercase;" placeholder="#C70039">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="novoWhatsappLoja">Whatsapp da Loja</label>
+                        <input type="text" id="novoWhatsappLoja" class="whatsapp-mask" placeholder="Ex: (99) 99999-9999" maxlength="20">
+                      </div>
+                      <button class="btn-save" id="btnSalvarNome">
+                        <i class="mdi mdi-check"></i>
+                        Salvar Alterações
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popup para Gerenciar Banners -->
+          <div class="popup popup-banners">
+            <div class="view popup-view">
+              <div class="page">
+                <div class="top-nav">
+                  <div class="left">
+                    <a href="#" class="link btn-novo popup-close">
+                      <i class="mdi mdi-arrow-left"></i>
+                    </a>
+                  </div>
+                  <strong class="title-descricao">Gerenciar Banners</strong>
+                  <div style="width: 30px;"></div>
+                </div>
+                <div class="page-content">
+                  <div class="block">
+                    <div class="add-banner-card">
+                      <button class="btn-add-banner" id="btnAdicionarBanner">
+                        <i class="mdi mdi-plus"></i>
+                        Adicionar Banner
+                      </button>
+                      <input type="file" id="novoBannerInput" accept="image/*" style="display: none;">
+                    </div>
+
+                    <div class="banners-list" id="bannersLista">
+                      <!-- Banners serão listados aqui dinamicamente -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popup para Gerenciar Categorias -->
+          <div class="popup popup-categorias">
+            <div class="view popup-view">
+              <div class="page">
+                <div class="top-nav">
+                  <div class="left">
+                    <a href="#" class="link btn-novo popup-close">
+                      <i class="mdi mdi-arrow-left"></i>
+                    </a>
+                  </div>
+                  <strong class="title-descricao">Gerenciar Categorias</strong>
+                  <div style="width: 30px;"></div>
+                </div>
+                <div class="page-content">
+                  <div class="block">
+                    <div class="categorias-header">
+                      <h4>Selecione as categorias que deseja exibir em sua loja</h4>
+                      <p>Escolha as categorias de produtos que melhor se adequam ao seu público</p>
+                    </div>
+
+                    <div class="categorias-container" id="categoriasContainer">
+                      <!-- Categorias serão carregadas aqui dinamicamente -->
+                    </div>
+
+                    <div class="categorias-actions">
+                      <button class="btn-clear-categorias" id="btnLimparCategorias">
+                        <i class="mdi mdi-delete"></i>
+                        Limpar Todas
+                      </button>
+                      <button class="btn-save-categorias" id="btnSalvarCategorias">
+                        <i class="mdi mdi-check"></i>
+                        Salvar Categorias
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popup de Sucesso -->
+          <div class="popup popup-sucesso">
+            <div class="view popup-view">
+              <div class="page">
+                <div class="page-content">
+                  <div class="success-container">
+                    <div class="success-icon">
+                      <i class="mdi mdi-check-circle"></i>
+                    </div>
+                    <h2>Loja Criada com Sucesso!</h2>
+                    <p>Sua loja está pronta e você já pode começar a divulgar seus produtos.</p>
+                    
+                    <div class="success-actions">
+                      <button class="btn-share-now" id="btnCompartilharAgora">
+                        <i class="mdi mdi-share"></i>
+                        Compartilhar Agora
+                      </button>
+                      <button class="btn-continue" id="btnContinuar">
+                        Continuar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Popup para Alterar Logo -->
+          <div class="popup popup-logo-loja">
+            <div class="view popup-view">
+              <div class="page">
+                <div class="top-nav">
+                  <div class="left">
+                    <a href="#" class="link btn-novo popup-close">
+                      <i class="mdi mdi-arrow-left"></i>
+                    </a>
+                  </div>
+                  <strong class="title-descricao">Alterar Logo</strong>
+                  <div style="width: 30px;"></div>
+                </div>
+                <div class="page-content">
+                  <div class="block">
+                    <div id="logoAtualExibicao"></div>
+                    <div class="add-banner-card">
+                      <button class="btn-add-banner" id="btnSelecionarLogo">
+                        <i class="mdi mdi-upload"></i>
+                        Selecionar Logo
+                      </button>
+                      <input type="file" id="novoLogoInput" accept="image/*" style="display: none;">
+                    </div>
+                    <small id="logoPreviewHelp">Pré-visualização abaixo (800x200px recomendado):</small>
+                    <div id="logoPreview" style="margin-top:10px;"></div>
+                    <button class="btn-save" id="btnSalvarLogo" style="margin-top:20px; width:100%;">
+                      <i class="mdi mdi-check"></i>
+                      Salvar Logo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Path to Framework7 Library Bundle JS-->
+  <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+  <!-- jQuery -->
+  <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+  <!-- Roteamento do app-->
+  <script type="text/javascript" src="js/routes.js"></script>
+  <!-- Funções da Minha Loja -->
+  <script type="text/javascript" src="js/minha-loja.js"></script>
+  <script src="cordova.js"></script>
+</body>
+</html>

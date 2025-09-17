@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <!-- Required meta tags-->
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover"
+         />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <!-- Color theme for statusbar (Android only) -->
+      <meta name="theme-color" content="#FF4B00" />
+      <!-- Your app title -->
+      <title>VITATOP</title>
+      <!-- Path to Framework7 Library Bundle CSS -->
+      <link rel="stylesheet" href="lib/framework7-bundle.min.css" />
+      <!-- CSS PERSONALIZADO PARA MENU-->
+      <link rel="stylesheet" href="css/index.css" />
+      <link rel="stylesheet" href="css/carrinho.css" />
+      <link rel="stylesheet" href="css/campanhas.css" />
+      <!--Ícones Material Design-->
+      <link rel="stylesheet" href="css/materialdesignicons.min.css" />
+      <!-- Icones do Remix icon-->
+      <link rel="stylesheet" href="css/remixicon/remixicon.css" />
+   </head>
+   <body>
+      <!-- App root element -->
+      <div id="app">
+         <!-- Your main view, should have "view-main" class -->
+         <div class="view view-main">
+            <!-- Initial Page, "data-name" contains page name -->
+            <div data-name="campanhas" class="page color-theme-blue">
+               <!-- NAV TOPO-->
+               <div class="top-nav">
+                  <div class="left">
+                     <img src="img/logo-nav.png" class="title-logo" width="130px" style="margin-left: 10px;" />
+                  </div>
+                  <!-- Agrupe os ícones em uma div -->
+                  <div class="right-icons">
+                     <!-- Botão de Notificações -->
+                     <div class="btn-notificacao" data-count="0" onclick="app.views.main.router.navigate('/notificacoes/')">
+                        <i class="mdi mdi-bell-outline"></i>
+                     </div>
+                     <!-- Botão do Carrinho -->
+                     <div class="btn-cart" data-count="0" onclick="app.views.main.router.navigate('/carrinho/')">
+                        <i class="mdi mdi-cart-outline"></i>
+                     </div>
+                  </div>
+               </div>
+               <!-- Cabeçalho com título da página -->
+               <div class="dashboard-header">
+                  <h1>Campanhas e Promoções</h1>
+                  <p>Confira nossas campanhas especiais e ofertas exclusivas</p>
+               </div>
+               <!-- Scrollable page content -->
+               <div class="page-content" style="background-color: #f7f9fa">
+                  <div class="block no-margin-top">
+                     <!-- Área de filtro de categorias -->
+                     <div class="campaign-categories">
+                        <div class="category-pill active" data-category="all">Todas</div>
+                        <div class="category-pill" data-category="promocoes">Promoções</div>
+                        <div class="category-pill" data-category="saude">Saúde</div>
+                        <div class="category-pill" data-category="datas">Datas Especiais</div>
+                        <div class="category-pill" data-category="lancamentos">Lançamentos</div>
+                     </div>
+                     <!-- Container de campanhas -->
+                     <div id="container-campanhas" class="campaigns-container">
+                        <!-- Campanhas serão inseridas aqui pelo JavaScript -->
+                        <!-- Skeleton para carregamento -->
+                        <div class="campaign-card skeleton-card">
+                           <div class="campaign-image skeleton-effect-wave"></div>
+                           <div class="campaign-content">
+                              <div class="campaign-title skeleton-effect-wave"></div>
+                              <div class="campaign-subtitle skeleton-effect-wave"></div>
+                              <div class="campaign-period skeleton-effect-wave"></div>
+                           </div>
+                        </div>
+                        <div class="campaign-card skeleton-card">
+                           <div class="campaign-image skeleton-effect-wave"></div>
+                           <div class="campaign-content">
+                              <div class="campaign-title skeleton-effect-wave"></div>
+                              <div class="campaign-subtitle skeleton-effect-wave"></div>
+                              <div class="campaign-period skeleton-effect-wave"></div>
+                           </div>
+                        </div>
+                        <div class="campaign-card skeleton-card">
+                           <div class="campaign-image skeleton-effect-wave"></div>
+                           <div class="campaign-content">
+                              <div class="campaign-title skeleton-effect-wave"></div>
+                              <div class="campaign-subtitle skeleton-effect-wave"></div>
+                              <div class="campaign-period skeleton-effect-wave"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <br /><br /><br /><br /><br /><br /><br /><br />
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Path to Framework7 Library Bundle JS-->
+      <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+      <!-- jQuery -->
+      <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+      <!-- Roteamento do app-->
+      <script type="text/javascript" src="js/routes.js"></script>
+      <script src="cordova.js"></script>
+   </body>
+</html>

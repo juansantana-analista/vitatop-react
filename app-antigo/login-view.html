@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Required meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Color theme for statusbar (Android only) -->
+  <meta name="theme-color" content="#8D51FF">
+  <!-- Your app title -->
+    <title>G3 PAY</title>
+  <!-- Path to Framework7 Library Bundle CSS -->
+  <link rel="stylesheet" href="lib/framework7-bundle.min.css">
+  <!-- CSS PERSONALIZADO PARA MENU-->
+  <link rel="stylesheet" href="css/index.css">
+  <!--Ícones Material Design-->
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
+  <!-- Icones do Remix icon-->
+  <link rel="stylesheet" href="css/remixicon/remixicon.css">
+</head>
+
+<body>
+  <!-- App root element -->
+  <div id="app">
+    <!-- Your main view, should have "view-main" class -->
+    <div class="view view-main">
+      <!-- Initial Page, "data-name" contains page name -->
+      <div data-name="login-view" class="page color-theme-blue">
+        <!-- Navbar -->
+        <!-- Scrollable page content -->
+        <div class="page-content login-body">
+
+          <div class="login-container">
+            <img src="img/logo.png" alt="Logo" class="logo-login mx-auto">
+            
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="email" id="userName" name="userName" placeholder="E-mail" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="userPassword" name="userPassword" placeholder="Senha" required>
+                </div>
+                
+                <button type="submit" id="signIn" class="login-btn" style="background-color: #00591f; margin-bottom: 15px;">Entrar</button>
+                
+                <a href="#" id="forgotPasswordLink" class="forgot-password">Esqueceu a senha?</a>
+                
+            </form>
+    
+            <!-- Password Recovery Email Form -->
+            <form id="recoveryEmailForm" class="hidden">
+                <h2 class="text-xl font-bold mb-4">Recuperar Senha</h2>
+                <p class="text-sm text-gray-600 mb-4">Digite seu e-mail para recuperar sua senha</p>
+                
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="emailRecuperacao" placeholder="E-mail" required>
+                </div>
+                
+                <button type="submit" id="forgotPassword" class="recovery-btn" style="background-color: #e64400;">Enviar Código</button>
+                
+                <div class="back-to-login" id="backToLogin">Voltar para o login</div>
+            </form>
+    
+            <!-- Verification Code Form -->
+            <form id="verificationCodeForm" class="hidden">
+                <h2 class="text-xl font-bold mb-4">Verificação</h2>
+                <p class="text-sm text-gray-600 mb-4">Digite o código de 6 dígitos enviado para seu e-mail</p>
+                
+                <div class="code-inputs">
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                    <input type="text" maxlength="1" pattern="[0-9A-Za-z]" required>
+                </div>
+                
+                <button type="submit" class="recovery-btn" id="redefinirSenha" style="background-color: #e64400;">Verificar Código</button>
+                
+                <div class="back-to-login" id="backToLogin2">Voltar para o login</div>
+            </form>
+    
+            <!-- New Password Form -->
+            <form id="newPasswordForm" class="hidden">
+                <h2 class="text-xl font-bold mb-4">Nova Senha</h2>
+                <p class="text-sm text-gray-600 mb-4">Digite sua nova senha</p>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Nova Senha" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Confirmar Nova Senha" required>
+                </div>
+                
+                <button type="submit" class="recovery-btn" style="background-color: #e64400;">Redefinir Senha</button>
+            </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Path to Framework7 Library Bundle JS-->
+  <script type="text/javascript" src="lib/framework7-bundle.min.js"></script>
+  <!-- jQuery -->
+  <script type="text/javascript" src="lib/jquery-3.7.0.min.js"></script>
+  <!-- Roteamento do app-->
+  <script type="text/javascript" src="js/routes.js"></script>
+  <script src="cordova.js"></script>
+</body>
+
+</html>

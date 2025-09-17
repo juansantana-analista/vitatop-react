@@ -1,0 +1,191 @@
+/* CSS para o Menu Lateral - Adicionar no index.css */
+
+/* Estilos para o menu lateral direito */
+.menu-lateral-list {
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff; /* Fundo branco para o menu */
+}
+
+.menu-lateral-list ul {
+  padding: 0;
+  margin: 0;
+  background-color: #ffffff;
+}
+
+.menu-lateral-list li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.menu-lateral-list li:hover {
+  background-color: rgba(0, 89, 31, 0.05);
+}
+
+.item-menu-lateral {
+  display: block;
+  color: var(--preto);
+  text-decoration: none;
+  padding: 15px 20px;
+  transition: all 0.3s ease;
+}
+
+.item-menu-lateral:hover {
+  background-color: rgba(0, 89, 31, 0.1);
+  transform: translateX(-5px);
+  color: var(--verde-escuro);
+}
+
+.item-menu-lateral .item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.item-menu-lateral .item-media {
+  width: 50px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--verde-escuro);
+}
+
+.item-menu-lateral .item-inner {
+  flex: 1;
+  margin-left: 15px;
+}
+
+.item-menu-lateral .item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--preto);
+  margin-bottom: 3px;
+  transition: color 0.3s ease;
+}
+
+.item-menu-lateral .item-subtitle {
+  font-size: 12px;
+  color: #666666;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.item-menu-lateral:hover .item-title {
+  color: var(--verde-escuro);
+}
+
+.item-menu-lateral:hover .item-subtitle {
+  color: var(--verde-escuro);
+}
+
+.item-menu-lateral:hover .item-media {
+  color: var(--verde-escuro);
+}
+
+/* Badge para notificações no menu */
+.badge-notif {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff3b30;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  min-width: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.badge-notif[data-count="0"] {
+  display: none;
+}
+
+/* Separador no menu */
+.menu-separador {
+  padding: 10px 0;
+  border-bottom: none !important;
+  background-color: #ffffff;
+}
+
+.separator-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+  margin: 0 20px;
+}
+
+/* Logo no menu */
+.menu-logo {
+  padding: 20px 0;
+  border-bottom: none !important;
+  background-color: #ffffff;
+}
+
+.menu-logo .item-content {
+  justify-content: center;
+}
+
+/* Animação de entrada do menu */
+.panel-right.panel-in {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .item-menu-lateral .item-title {
+    font-size: 15px;
+  }
+  
+  .item-menu-lateral .item-subtitle {
+    font-size: 11px;
+  }
+  
+  .item-menu-lateral .item-media {
+    font-size: 22px;
+    width: 45px;
+  }
+}
+
+/* Estilo para o botão de menu na tabbar */
+.bottom-nav .menu-tab-link {
+  position: relative;
+}
+
+.bottom-nav .menu-tab-link.active {
+  color: var(--verde-escuro);
+  background-color: rgba(0, 89, 31, 0.1);
+  border-radius: 10px;
+  margin: 5px;
+}
+
+/* Efeito visual quando o menu está ativo */
+.bottom-nav .menu-tab-link.menu-active i {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+.bottom-nav .menu-tab-link i {
+  transition: transform 0.3s ease;
+}
+
+/* Overlay personalizado para o menu */
+.panel-backdrop.panel-backdrop-in {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
